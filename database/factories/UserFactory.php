@@ -21,7 +21,7 @@ class UserFactory extends Factory
             'name' => 'Admin',
             'username' => 'admin25',
             'email' => 'dabourdabour28@gmail.com',
-            'password' => '123456',
+            'password' => bcrypt('12345'),
         ];
     }
 
@@ -30,7 +30,7 @@ class UserFactory extends Factory
      */
     public function unverified(): static
     {
-        return $this->state(fn (array $attributes) => [
+        return $this->state(fn(array $attributes) => [
             'email_verified_at' => null,
         ]);
     }

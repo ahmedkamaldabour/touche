@@ -3,7 +3,11 @@
 namespace App\Exceptions;
 
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Symfony\Component\HttpKernel\Exception\MethodNotAllowedHttpException;
 use Throwable;
+use function back;
+use function response;
+use function route;
 
 class Handler extends ExceptionHandler
 {
@@ -27,4 +31,12 @@ class Handler extends ExceptionHandler
             //
         });
     }
+
+//    public function render($request, Throwable $e)
+//    {
+//        if ($e instanceof MethodNotAllowedHttpException) {
+//            return response()->redirectTo(route('dashboard'));
+//        }
+//        return parent::render($request, $e);
+//    }
 }

@@ -3,13 +3,17 @@
 namespace App\Http\Repositories\EndUser;
 
 use App\Http\Interfaces\EndUser\HomeInterface;
+use App\Http\Traits\EndUser\HomeTrait;
 
 class HomeRepository implements HomeInterface
 {
+    use HomeTrait;
 
     public function index()
     {
-        return view('EndUser.index');
+        $categories = $this->allHomeCategories();
+        $products = $this->allHomeProducts();
+        return view('EndUser.index', compact('categories', 'products'));
     }
 
     public function contact()

@@ -9,6 +9,7 @@ class Product extends Model
 {
     use HasFactory;
 
+    final public const IMAGE_PATH = 'images/products/';
     protected $fillable = [
         'name',
         'description',
@@ -20,6 +21,17 @@ class Product extends Model
     public function category()
     {
         return $this->belongsTo(Category::class, 'category_id', 'id');
+    }
+
+    protected $hidden = [
+        'created_at',
+        'updated_at',
+    ];
+
+
+    public function getImageAttribute($value)
+    {
+        return '/'. self::IMAGE_PATH . $value;
     }
 
 }

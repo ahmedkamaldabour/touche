@@ -3,7 +3,7 @@
     <div class="layout-container">
         <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">
             <div class="app-brand demo">
-                <a href="index.html" class="app-brand-link">
+                <a href="#" class="app-brand-link">
               <span class="app-brand-logo demo">
                 <svg
                     width="25"
@@ -59,7 +59,7 @@
                   </g>
                 </svg>
               </span>
-                    <span class="app-brand-text demo menu-text fw-bolder ms-2">Sneat</span>
+                    <span class="app-brand-text demo menu-text fw-bolder ms-2">akd</span>
                 </a>
 
                 <a href="javascript:void(0);" class="layout-menu-toggle menu-link text-large ms-auto d-block d-xl-none">
@@ -69,29 +69,42 @@
             <div class="menu-inner-shadow"></div>
             <ul class="menu-inner py-1">
                 <!-- Dashboard -->
-                <li class="menu-item active">
-                    <a href="index.html" class="menu-link">
+                <li class="menu-item">
+                    <a href="{{route("dashboard")}}" class="menu-link">
                         <i class="menu-icon tf-icons bx bx-home-circle"></i>
                         <div data-i18n="Analytics">Dashboard</div>
                     </a>
                 </li>
-                <!-- Cards -->
-                <li class="menu-item">
-                    <a href="cards-basic.html" class="menu-link">
-                        <i class="menu-icon tf-icons bx bx-collection"></i>
-                        <div data-i18n="Basic">Cards</div>
-                    </a>
-                </li>
-                <!-- User interface -->
+                <!-- Categories -->
                 <li class="menu-item">
                     <a href="javascript:void(0)" class="menu-link menu-toggle">
                         <i class="menu-icon tf-icons bx bx-box"></i>
-                        <div data-i18n="User interface">User interface</div>
+                        <div data-i18n="User interface">Categories</div>
                     </a>
                     <ul class="menu-sub">
                         <li class="menu-item">
-                            <a href="ui-accordion.html" class="menu-link">
-                                <div data-i18n="Accordion">Accordion</div>
+                            <a href="{{route('category.create')}}" class="menu-link">
+                                <div data-i18n="Accordion">Add Category</div>
+                            </a>
+                            <a href="{{route('category.index')}}" class="menu-link">
+                                <div data-i18n="Accordion">ALL Category</div>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                <!-- Products -->
+                <li class="menu-item">
+                    <a href="javascript:void(0)" class="menu-link menu-toggle">
+                        <i class="menu-icon tf-icons bx bx-box"></i>
+                        <div data-i18n="User interface">Products</div>
+                    </a>
+                    <ul class="menu-sub">
+                        <li class="menu-item">
+                            <a href="{{route('product.create')}}" class="menu-link">
+                                <div data-i18n="Accordion">Add Product</div>
+                            </a>
+                            <a href="{{route('product.index')}}" class="menu-link">
+                                <div data-i18n="Accordion">ALL Products</div>
                             </a>
                         </li>
                     </ul>
