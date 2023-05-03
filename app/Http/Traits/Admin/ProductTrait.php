@@ -7,8 +7,10 @@ trait ProductTrait
 
     private function getAllProducts()
     {
-        return $this->product::with(relations: 'category:id,name')->orderBy(column: 'id', direction: 'desc')->paginate();
-//        return $this->product::with(relations: 'category:id,name')->orderBy(column: 'id', direction: 'desc')->get();
+        return $this->product::with(relations: 'category:id,name')
+            ->orderBy(column: 'id', direction: 'desc')
+            ->paginate();
+
     }
 
     private function getPoductsById($id)
@@ -18,7 +20,8 @@ trait ProductTrait
 
     private function getProductByIdWithCategory($id)
     {
-        return $this->product->with('category:id,name')->findOrfail($id);
+//        return $this->product->with('category:id,name')->findOrfail($id);
+        return $this->product->findOrfail($id);
     }
 
     // get category all

@@ -4,6 +4,9 @@ namespace App\Http\Repositories\EndUser;
 
 use App\Http\Interfaces\EndUser\HomeInterface;
 use App\Http\Traits\EndUser\HomeTrait;
+use App\Models\Category;
+use App\Models\Product;
+use function compact;
 
 class HomeRepository implements HomeInterface
 {
@@ -11,9 +14,7 @@ class HomeRepository implements HomeInterface
 
     public function index()
     {
-        $categories = $this->allHomeCategories();
-        $products = $this->allHomeProducts();
-        return view('EndUser.index', compact('categories', 'products'));
+        return view('EndUser.index');
     }
 
     public function contact()

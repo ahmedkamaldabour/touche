@@ -15,7 +15,6 @@
                                 <i class="fab fa-apple fa-lg pt-3 pb-1 px-3"></i>
                                 <img src={{$product->image}}  width="300" height="300"
                                      class="card-img-top" alt="Product"/>
-
                                 <div class="card-body">
                                     <div class="text-center">
                                         <h5 class="card-title">{{$product->name}}</h5>

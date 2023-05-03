@@ -3,6 +3,7 @@
 namespace App\Http\Requests\Admin;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class ProductStoreRequest extends FormRequest
 {
@@ -25,7 +26,11 @@ class ProductStoreRequest extends FormRequest
             'name' => 'required|string|min:3|max:255 |regex:/^[a-zA-Z0-9\s]+$/', // only letters, numbers and spaces
             'description' => 'required|string|min:3|max:255|regex:/^[a-zA-Z0-9\s]+$/', // only letters, numbers and spaces
             'price' => 'required|numeric|min:0.01|max:9999999',
-            'category_id' => 'required|exists:categories,id',
+//            'category_id' => 'required|exists:categories,id',
+            'category_id' => [
+                'required',
+                Rule::unique('categories', 'name'),
+            ],
             'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:9048',
         ];
     }

@@ -6,8 +6,6 @@ use App\Http\Interfaces\Admin\CategoryInterface;
 use App\Http\Traits\Admin\CategoryTrait;
 use App\Models\Category;
 use function alert;
-use function dd;
-use function toast;
 
 class CategoryRepository implements CategoryInterface
 {
@@ -61,5 +59,12 @@ class CategoryRepository implements CategoryInterface
         $category->delete();
         alert()->success('Success', 'Category deleted successfully');
         return redirect()->route('category.index');
+    }
+
+    public function show($id)
+    {
+        $category = $this->getCategoryById($id);
+        $products = $category->products()->latest()->paginate();
+        return view('Admin.pages.categories.show', compact('category', 'products'));
     }
 }

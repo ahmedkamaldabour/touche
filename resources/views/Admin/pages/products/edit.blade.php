@@ -22,7 +22,7 @@
                                     type="text"
                                     class="form-control"
                                     name="name"
-                                    value="{{ $product->name }}"
+                                    value="{{ old('name',$product->name) }}"
                                     id="defaultFormControlInput"
                                     placeholder="Product Name"
                                     aria-describedby="defaultFormControlHelp"
@@ -34,14 +34,14 @@
                                     id="defaultFormControlTextarea"
                                     rows="3"
                                     placeholder="Product Description"
-                                >{{ $product->description }}</textarea>
+                                >{{ old('description',$product->description) }}</textarea>
 
                                 <label for="defaultFormControlInput" class="form-label">Price</label>
                                 <input
                                     type="number"
                                     class="form-control"
                                     name="price"
-                                    value="{{ $product->price }}"
+                                    value="{{old('price', $product->price) }}"
                                     id="defaultFormControlInput"
                                     placeholder="Product Price"
                                     aria-describedby="defaultFormControlHelp"

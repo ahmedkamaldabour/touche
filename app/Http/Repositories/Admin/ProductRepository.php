@@ -25,7 +25,6 @@ class ProductRepository implements ProductInterface
 
     private $product;
     private $category;
-
     private $db;
 
     public function __construct(Product $product, Category $category, DB $db)
@@ -96,12 +95,12 @@ class ProductRepository implements ProductInterface
     {
         $product = $this->getPoductsById($id);
         $this->db::transaction(function () use ($product) {
-            $this->deleteImage($product::IMAGE_PATH, $product->image);
+            $this->deleteImage($product->image);
             $product->delete();
         });
 //        $this->setProductsInRedis();
         alert()->success('Product Deleted Successfully', 'Success');
-        return redirect()->back();
+        return redirect()->route('product.index');
     }
 
     public function show($id)

@@ -10,6 +10,7 @@ use function dump;
 
 trait HomeTrait
 {
+
     private function allHomeCategories()
     {
         return Category::with('products')->get()->map(callback: function ($category) {

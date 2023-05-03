@@ -42,5 +42,10 @@ class CategoryController extends Controller
         return $this->categoryInterface->destroy($id);
     }
 
+    public function show($id)
+    {
+        return $this->categoryInterface->show($id);
+    }
+
 
 }

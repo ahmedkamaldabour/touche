@@ -30,6 +30,7 @@ Route::group(
         Route::get('/category/edit/{id}', 'edit')->name('edit');
         Route::put('/category/update/{id}', 'update')->name('update');
         Route::delete('/category/delete/{id}', 'destroy')->name('destroy');
+        Route::get('/category/show/{id}', 'show')->name('show');
     });
 
 Route::group(
@@ -45,6 +46,5 @@ Route::group(
         Route::get('/product/edit/{id}', 'edit')->name('edit');
         Route::put('/product/update/{id}', 'update')->name('update');
         Route::delete('/product/delete/{id}', 'destroy')->name('destroy');
-
     });
 
