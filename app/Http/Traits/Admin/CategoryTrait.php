@@ -9,4 +9,6 @@ trait CategoryTrait
         return $this->category->findOrfail($id);
     }
 
+
+
 }

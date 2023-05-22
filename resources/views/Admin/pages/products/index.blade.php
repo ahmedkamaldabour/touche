@@ -15,7 +15,7 @@
                 </div>
                 <div class="table-responsive text-nowrap">
                     @include('message.flash')
-                    <table class="table">
+                    <table id="myTable" class="table">
                         <thead>
                         <tr>
                             <th>#</th>
@@ -30,32 +30,33 @@
                         <tbody class="table-border-bottom-0">
                         <tr>
                             @forelse($products as $product)
-                                <td>{{ $loop->iteration }}</td>
-                                <td><img src="{{$product->image}}" alt=""
-                                         style="width: 100px; height: 100px"></td>
-                                <td>{{ $product->name }}</td>
-                                <td>{{ $product->category->name }}</td>
-                                <td>{{ $product->price }}</td>
-                                <td>
-                                    <div class="btn-group ">
-                                        <a href="{{ route('product.edit' , $product->id) }}"
-                                           class="btn btn-primary btn-sm ">Edit</a>
-                                        <div class='m-1'></div>
-                                        <form action="{{ route('product.destroy' , $product->id) }}" method="post">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button class="btn btn-danger btn-sm">Delete</button>
-                                        </form>
+                                <div id="{{$product->id}}">
+                                    <td>{{ $loop->iteration }}</td>
+                                    <td><img src="{{$product->image}}" alt=""
+                                             style="width: 100px; height: 100px"></td>
+                                    <td>{{ $product->name }}</td>
+                                    <td>{{ $product->category->name }}</td>
+                                    <td>{{ $product->price }}</td>
+                                    <td>
+                                        <div class="btn-group ">
+                                            <a href="{{ route('product.edit' , $product->id) }}"
+                                               class="btn btn-primary btn-sm ">Edit</a>
+                                            <div class='m-1'></div>
+                                            {{--                                        <form id="btn-delete" action="{{ route('product.destroy' , $product->id) }}" method="post">--}}
+                                            {{--                                            @csrf--}}
+                                            {{--                                            @method('DELETE')--}}
+                                            <button id="btn-delete" onclick="ajaxDelete({{$product->id}})" class="btn btn-danger btn-sm">Delete</button>
+                                            {{--                                        </form>--}}
+                                            <div class='m-1'></div>
+                                            <a href="{{ route('product.show' , $product->id) }}"
+                                               class="btn btn-success btn-sm ">Show</a>
+                                        </div>
+                                    </td>
+                                </div>
 
-                                        <div class='m-1'></div>
-                                        <a href="{{ route('product.show' , $product->id) }}"
-                                           class="btn btn-success btn-sm ">Show</a>
-                                    </div>
-                                </td>
                         </tr>
                         @empty
                             <td colspan="3" class="text-center">No Products Found</td>
-
                         @endforelse
                         </tbody>
                     </table>
@@ -71,5 +72,37 @@
         </div>
     </div>
 @endsection
+
+@push('js')
+
+<script>
+
+    function ajaxDelete(id) {
+        const productDiv = document.getElementById(id);
+        // console.log('productDiv', productDiv);
+        // console.log('id', id);
+        $.ajax({
+            url: `/admin/product/delete/${id}`,
+            type: "post",
+            data: {
+                _token: "{{ csrf_token() }}",
+                id: id,
+                _method: "DELETE"
+            },
+            success: function (response) {
+                console.log(response);
+
+            },
+            error: function (error) {
+                console.log(error);
+            }
+        });
+    }
+
+</script>
+
+
+
+@endpush
 
 

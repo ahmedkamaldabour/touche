@@ -4,7 +4,7 @@ namespace App\Http\Interfaces\Admin;
 
 interface CategoryInterface
 {
-    public function index();
+    public function index($dataTable);
 
     public function create();
 

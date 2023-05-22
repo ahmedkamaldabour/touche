@@ -23,7 +23,6 @@ trait ProductTrait
 //        return $this->product->with('category:id,name')->findOrfail($id);
         return $this->product->findOrfail($id);
     }
-
     // get category all
     private function getAllCategory()
     {

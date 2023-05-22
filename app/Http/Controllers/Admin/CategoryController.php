@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\DataTables\CategoryDataTable;
 use App\Http\Controllers\Controller;
 use App\Http\Interfaces\Admin\CategoryInterface;
 use App\Http\Requests\Admin\CategoryStoreRequest;
@@ -15,9 +16,9 @@ class CategoryController extends Controller
     {
         $this->categoryInterface = $categoryInterface;
     }
-    public function index()
+    public function index(CategoryDataTable $categoryDataTable)
     {
-        return $this->categoryInterface->index();
+        return $this->categoryInterface->index($categoryDataTable);
     }
     public function create()
     {
@@ -27,12 +28,10 @@ class CategoryController extends Controller
     {
         return $this->categoryInterface->store($request);
     }
-
     public function edit($id)
     {
         return $this->categoryInterface->edit($id);
     }
-
     public function update(CategoryUpdateRequest $request, $id)
     {
         return $this->categoryInterface->update($request, $id);
@@ -41,11 +40,12 @@ class CategoryController extends Controller
     {
         return $this->categoryInterface->destroy($id);
     }
-
     public function show($id)
     {
         return $this->categoryInterface->show($id);
     }
+
+
 
 
 }

@@ -3,59 +3,58 @@
 
 @section('title' , 'Dashboard | Category' )
 
+@push('css')
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.13.4/css/dataTables.bootstrap5.min.css">
+    {{--    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/responsive/2.4.1/css/responsive.dataTables.min.css">--}}
+@endpush
 
 @section('content')
-    <div class="container-xxl flex-grow-1 container-p-y">
-        <div class="row">
-            <!-- Basic Bootstrap Table -->
-            <div class="card">
-                <h5 class="card-header">All Categories</h5>
-                <div class="card-body">
-                    <a href="{{ route('category.create') }}" class="btn btn-primary btn-sm">Add New Category</a>
-                </div>
-                <div class="table-responsive text-nowrap">
-                    @include('message.flash')
-                    <table class="table">
-                        <thead>
-                        <tr>
-                            <th>#</th>
-                            <th>Name</th>
-                            <th> Product Count</th>
-                            <th>Action</th>
-                        </tr>
-                        </thead>
-                        <tbody class="table-border-bottom-0">
-                        <tr>
-                            @forelse($categories as $category)
-                                <td>{{ $loop->iteration }}</td>
-                                <td>
-                                    <a href="{{ route('category.show' , $category->id) }}">{{ $category->name }}</a>
-                                </td>
-                                <td>{{ $category->products_count }}</td>
-                                <td>
-                                    <div class="btn-group ">
-                                        <a href="{{ route('category.edit' , $category->id) }}"
-                                           class="btn btn-primary btn-sm ">Edit</a>
-                                        <div class='m-1'></div>
-                                        <form action="{{ route('category.destroy' , $category->id) }}" method="post">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button class="btn btn-danger btn-sm">Delete</button>
-                                        </form>
-                                    </div>
-                                </td>
-                        </tr>
-                        @empty
-                            <td colspan="3" class="text-center">No Category Found</td>
+    <div id="content" class="main-content">
+        <div class="layout-px-spacing">
 
-                        @endforelse
-                        </tbody>
-                    </table>
+            <div class="middle-content container-xxl p-0">
+                <div class="col-xl-12 col-lg-12 col-sm-12  layout-spacing mt-5">
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <a href="{{route('category.create')}}">
+                                    <h3>Add Category</h3>
+                                </a>
+                                <a href="{{route('category.create')}}">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="35" height="35" viewBox="0 0 24 24"
+                                         fill="none"
+                                         stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                         stroke-linejoin="round"
+                                         class="feather feather-plus">
+                                        <line x1="12" y1="5" x2="12" y2="19"></line>
+                                        <line x1="5" y1="12" x2="19" y2="12"></line>
+                                    </svg>
+                                </a>
+                            </div>
+
+                        </div>
+                        <div class="card-body">
+                            {!! $dataTable->table(['class' => 'table table-striped dt-table-hover dataTable']) !!}
+                        </div>
+                    </div>
                 </div>
             </div>
-            <!--/ Basic Bootstrap Table -->
         </div>
     </div>
 @endsection
 
 
+@push('js')
+
+    <!-- BEGIN PAGE LEVEL SCRIPTS -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/jquery.validate.js"></script>
+    <script src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.21/js/dataTables.bootstrap4.min.js"></script>
+    <!-- BEGIN PAGE LEVEL PLUGINS/CUSTOM SCRIPTS -->
+
+    <script src="https://cdn.datatables.net/buttons/1.0.3/js/dataTables.buttons.min.js"></script>
+    <script src="/vendor/datatables/buttons.server-side.js"></script>
+    {{$dataTable->scripts()}}
+    <!-- END PAGE LEVEL SCRIPTS -->
+@endpush

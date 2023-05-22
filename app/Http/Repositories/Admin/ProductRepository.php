@@ -3,7 +3,6 @@
 namespace App\Http\Repositories\Admin;
 
 use App\Http\Interfaces\Admin\ProductInterface;
-use App\Http\Traits\Admin\ProductTrait;
 use App\Http\Traits\Admin\Redis\ProductRedisTrait;
 use App\Http\Traits\Admin\UploadImageTrait;
 use App\Models\Category;
@@ -75,12 +74,12 @@ class ProductRepository implements ProductInterface
     {
         $product = $this->getPoductsById($id);
         $this->db::transaction(function () use ($request, $product) {
-            $product->update([
+            $product->fill([
                 'name' => $request->name,
                 'description' => $request->description,
                 'price' => $request->price,
                 'category_id' => $request->category_id,
-            ]);
+            ])->save();
             if ($request->hasFile('image')) {
                 $image = $this->uploadImage($request, $this->product::IMAGE_PATH, $product->image);
                 $this->saveImage($product, $image);
@@ -94,13 +93,13 @@ class ProductRepository implements ProductInterface
     public function destroy($id)
     {
         $product = $this->getPoductsById($id);
-        $this->db::transaction(function () use ($product) {
-            $this->deleteImage($product->image);
-            $product->delete();
-        });
+//        $this->db::transaction(function () use ($product) {
+//            $this->deleteImage($product->image);
+//            $product->delete();
+//        });
 //        $this->setProductsInRedis();
-        alert()->success('Product Deleted Successfully', 'Success');
-        return redirect()->route('product.index');
+//        alert()->success('Product Deleted Successfully', 'Success');
+         return response()->json(['success' => 'Product Deleted Successfully']);
     }
 
     public function show($id)
@@ -108,6 +107,5 @@ class ProductRepository implements ProductInterface
         $product = $this->getProductByIdWithCategory($id);
         return view('Admin.pages.products.show', compact('product'));
     }
-
 
 }

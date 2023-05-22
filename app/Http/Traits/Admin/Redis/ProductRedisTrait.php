@@ -4,6 +4,7 @@ namespace App\Http\Traits\Admin\Redis;
 
 use App\Http\Traits\Admin\ProductTrait;
 use Illuminate\Support\Facades\Redis;
+use function json_decode;
 use function serialize;
 
 trait ProductRedisTrait
@@ -15,17 +16,15 @@ trait ProductRedisTrait
     {
         $redis = Redis::connection();
         $products = $this->getAllProducts();
-        $redis->set('products', serialize($products));
+        $redis->set('products', ($products));
         return true;
     }
 
     private function getProductsFromRedis()
     {
         $redis = Redis::connection();
-        if (isset($_GET['page'])) {
-            $this->setProductsInRedis();
-        }
-        $data = unserialize($redis->get('products'));
+        $data = json_decode($redis->get('products'), true);
+        dd($data);
         return empty($data) ? $this->setProductsInRedis() : $data;
     }
 

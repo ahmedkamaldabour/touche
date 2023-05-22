@@ -11,8 +11,8 @@ class CategoryAndProductsComposer
 
     public function compose(View $view)
     {
-        $categories = $this->allHomeCategories();
-        $products = $this->allHomeProducts();
+        $categories = $this->Categories();
+        $products = $this->Products();
         $view->with(compact('categories', 'products'));
     }
 }

@@ -24,6 +24,7 @@ class AppServiceProvider extends ServiceProvider
     {
         Paginator::useBootstrap();
 
+
 //        View::composer(
 //            [
 //                'EndUser.index',
@@ -32,8 +33,7 @@ class AppServiceProvider extends ServiceProvider
 //            ],
 //            CategoryAndProductsComposer::class);
         View::composer(
-            'EndUser.partials.composer.category-product.*'
-            ,
+            'EndUser.partials.composer.category-product.*',
             CategoryAndProductsComposer::class);
     }
 }

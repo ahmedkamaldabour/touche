@@ -6,6 +6,7 @@ use App\Http\Interfaces\Admin\CategoryInterface;
 use App\Http\Traits\Admin\CategoryTrait;
 use App\Models\Category;
 use function alert;
+use function compact;
 
 class CategoryRepository implements CategoryInterface
 {
@@ -17,10 +18,11 @@ class CategoryRepository implements CategoryInterface
         $this->category = $category;
     }
 
-    public function index()
+    public function index($dataTable)
     {
-        $categories = $this->category->withCount('products')->get();
-        return view('Admin.pages.categories.index', compact('categories'));
+//        $categories = $this->category->withCount('products')->get();
+//        return view('Admin.pages.categories.index', compact('categories'));
+        return $dataTable->render('Admin.pages.categories.index');
     }
 
     public function create()
