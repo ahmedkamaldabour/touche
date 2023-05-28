@@ -93,13 +93,12 @@ class ProductRepository implements ProductInterface
     public function destroy($id)
     {
         $product = $this->getPoductsById($id);
-//        $this->db::transaction(function () use ($product) {
-//            $this->deleteImage($product->image);
-//            $product->delete();
-//        });
+        $this->db::transaction(function () use ($product) {
+            $this->deleteImage($product->image);
+            $product->delete();
+        });
 //        $this->setProductsInRedis();
-//        alert()->success('Product Deleted Successfully', 'Success');
-         return response()->json(['success' => 'Product Deleted Successfully']);
+         return response()->json(['success' => true]);
     }
 
     public function show($id)
